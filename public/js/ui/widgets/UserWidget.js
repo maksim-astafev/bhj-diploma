@@ -5,6 +5,8 @@
  * */
 
 class UserWidget {
+  // static userNameLabel = document.querySelector(`.user-name`);
+
   /**
    * Устанавливает полученный элемент
    * в свойство element.
@@ -12,7 +14,16 @@ class UserWidget {
    * необходимо выкинуть ошибку.
    * */
   constructor(element){
+    this.userNameLabel = document.querySelector(`.user-name`);
 
+    if(!document.querySelector("body").contains(element)) {
+      throw `Элемент ${element} не существует`;
+    }
+    this.element = element;
+
+    // this.userNameLabel = document.querySelector(`.user-name`);
+    // console.log(this.userNameLabel);
+    // debugger;
   }
 
   /**
@@ -23,6 +34,11 @@ class UserWidget {
    * авторизованного пользователя
    * */
   update(){
+    const currentUser = User.current();
+    // console.log(currentUser);
 
+    if(currentUser && currentUser.name) {
+      this.userNameLabel.textContent = currentUser.name;
+    }
   }
 }
